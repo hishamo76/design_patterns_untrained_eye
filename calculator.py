@@ -41,3 +41,18 @@ class FileAverageCalculator(AverageCalculator):
 
     def dispose(self):
         self.file.close()
+
+
+class MemoryAverageCalculator(AverageCalculator):
+    def __init__(self, mem):
+        self.mem = mem
+    
+    def has_next(self):
+        return len(self.mem) > 0
+    
+    def next_item(self):
+        if self.has_next():
+            return self.mem.pop()
+
+mac = MemoryAverageCalculator([3, 1, 4, 1, 5, 9, 2, 6, 5, 3])
+print(mac.average())
