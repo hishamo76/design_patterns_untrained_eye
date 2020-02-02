@@ -20,7 +20,23 @@ class TurkeyAdapter:
     def __init__(self, adaptee):
         self.turkey = adaptee
     def quack(self):
-        pass
+        self.turkey.gobble()
     def fly(self):
         for i in range(5):
-            self.adaptee.fly()
+            self.turkey.fly()
+
+
+def duck_interaction(duck):
+    duck.quack()
+    duck.fly()
+
+duck=Duck()
+turkey=Turkey()
+turkey_adapter=TurkeyAdapter(turkey)
+print('The Turkey says...')
+turkey.gobble()
+turkey.fly()
+print('\nThe Duck says...')
+duck_interaction(duck)
+print('\nThe TurkeyAdapter says...')
+duck_interaction(turkey_adapter)

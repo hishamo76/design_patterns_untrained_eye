@@ -54,5 +54,23 @@ class MemoryAverageCalculator(AverageCalculator):
         if self.has_next():
             return self.mem.pop()
 
-mac = MemoryAverageCalculator([3, 1, 4, 1, 5, 9, 2, 6, 5, 3])
-print(mac.average())
+class GeneratorAdapter:
+    def __init__(self,adaptee):
+        self.adaptee=adaptee
+    
+    def readline(self):
+        try:
+            return next(self.adaptee)
+        except StopIteration:
+            return ''
+    
+    def close(self):
+        pass
+
+
+# mac = MemoryAverageCalculator([3, 1, 4, 1, 5, 9, 2, 6, 5, 3])
+# print(mac.average())
+from random import randint
+g=(randint(1,100) for i in range(1000000))
+fac=FileAverageCalculator(GeneratorAdapter(g))
+print(fac.average())# Call the template method
